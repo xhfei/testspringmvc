@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<bean name="/hello"
+		class="cn.javass.chapter4.web.controller.HelloWorldController" />
+	<bean name="/helloWithoutReturnModelAndView"
+		class="cn.javass.chapter4.web.controller.HelloWorldWithoutReturnModelAndViewController" />
+	<bean name="/helloLastModified"
+		class="cn.javass.chapter4.web.controller.HelloWorldLastModifiedCacheController" />
+	<bean name="/forwardToServlet"
+		class="org.springframework.web.servlet.mvc.ServletForwardingController">
+		<property name="servletName" value="forwarding"></property>
+	</bean>
+	<bean name="/abstractCommand"
+		class="cn.javass.chapter4.web.controller.MyAbstractCommandController">
+		<!-- 也可以通过依赖注入 注入命令实现类 -->
+		<property name="commandClass" value="cn.javass.chapter4.model.UserModel" />
+	</bean>
+	<bean name="/simpleForm"
+		class="cn.javass.chapter4.web.controller.RegisterSimpleFormController">
+		<property name="formView" value="register" />
+		<property name="successView" value="redirect:/success" />
+	</bean>
+	<bean name="/success" class="cn.javass.chapter4.web.controller.HelloWorldController" />
+</beans>
+
+
